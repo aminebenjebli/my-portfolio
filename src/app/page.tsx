@@ -1,103 +1,201 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
+import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
+import { Mail, Download, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+const fadeIn = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 },
+};
+
+const stagger = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="flex flex-col min-h-screen">
+      {/* Hero Section */}
+      <section className="container mx-auto px-4 py-20 md:py-32">
+        <motion.div
+          className="max-w-4xl mx-auto text-center"
+          initial="initial"
+          animate="animate"
+          variants={stagger}
+        >
+          <motion.h1
+            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
+            variants={fadeIn}
+          >
+            Hi, I'm <span className="text-primary">Amine Ben Jebli</span>
+          </motion.h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <motion.p
+            className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+            variants={fadeIn}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Full Stack Developer passionate about creating digital experiences
+            that make a difference.
+          </motion.p>
+
+          <motion.div
+            className="flex flex-wrap justify-center gap-4 mb-12"
+            variants={fadeIn}
           >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+            <Button
+              size="lg"
+              onClick={() =>
+                document
+                  .getElementById("projects")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              View My Work
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => window.open("/resume.pdf", "_blank")}
+            >
+              <Download className="mr-2 h-4 w-4" />
+              Resume
+            </Button>
+          </motion.div>
+
+          <motion.div
+            className="flex justify-center space-x-6"
+            variants={fadeIn}
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() =>
+                window.open("https://github.com/yourusername", "_blank")
+              }
+              aria-label="GitHub"
+            >
+              <GitHubLogoIcon className="h-6 w-6" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() =>
+                window.open("https://linkedin.com/in/yourusername", "_blank")
+              }
+              aria-label="LinkedIn"
+            >
+              <LinkedInLogoIcon className="h-6 w-6" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() =>
+                (window.location.href = "mailto:your.email@example.com")
+              }
+              aria-label="Email"
+            >
+              <Mail className="h-6 w-6" />
+            </Button>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* Featured Projects Section */}
+      <section
+        id="projects"
+        className="container mx-auto px-4 py-20 bg-muted/50"
+      >
+        <motion.div
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          variants={stagger}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold text-center mb-12"
+            variants={fadeIn}
+          >
+            Featured Projects
+          </motion.h2>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {[1, 2, 3].map((i) => (
+              <motion.div key={i} variants={fadeIn}>
+                <Card className="h-full hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle>Project {i}</CardTitle>
+                    <CardDescription>
+                      A brief description of what this project does and the
+                      technologies used.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex justify-between items-center">
+                      <div className="flex space-x-2">
+                        <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded">
+                          React
+                        </span>
+                        <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded">
+                          Next.js
+                        </span>
+                      </div>
+                      <div className="flex space-x-2">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() =>
+                            window.open(
+                              "https://github.com/yourusername/project",
+                              "_blank"
+                            )
+                          }
+                          aria-label="View source code"
+                        >
+                          <GitHubLogoIcon className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() =>
+                            window.open("https://project-demo.com", "_blank")
+                          }
+                          aria-label="View live demo"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div className="text-center mt-12" variants={fadeIn}>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => (window.location.href = "/projects")}
+            >
+              View All Projects
+            </Button>
+          </motion.div>
+        </motion.div>
+      </section>
     </div>
   );
 }
