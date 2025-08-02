@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { Mail, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AnimatedText, GradientText } from "@/components/ui/animated-text";
 import { fadeIn, stagger } from "@/data/animations";
 
 export function HeroSection() {
@@ -19,15 +20,27 @@ export function HeroSection() {
           className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
           variants={fadeIn}
         >
-          Hi, I'm <span className="text-primary">Amine Ben Jebli</span>
+          <AnimatedText
+            text="Hi, I'm "
+            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight"
+          />
+          <GradientText
+            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight"
+            gradient="from-primary via-blue-500 to-purple-600"
+          >
+            Amine Ben Jebli
+          </GradientText>
         </motion.h1>
 
         <motion.p
           className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
           variants={fadeIn}
         >
-          Full Stack Developer passionate about creating digital experiences
-          that make a difference.
+          <AnimatedText
+            text="Full Stack Mobile Engineer passionate about creating innovative mobile experiences that make a difference."
+            className="text-xl md:text-2xl"
+            delay={0.5}
+          />
         </motion.p>
 
         <motion.div
@@ -59,7 +72,7 @@ export function HeroSection() {
             variant="ghost"
             size="icon"
             onClick={() =>
-              window.open("https://github.com/yourusername", "_blank")
+              window.open("https://github.com/aminebenjebli", "_blank")
             }
             aria-label="GitHub"
           >
@@ -69,22 +82,22 @@ export function HeroSection() {
             variant="ghost"
             size="icon"
             onClick={() =>
-              window.open("https://linkedin.com/in/yourusername", "_blank")
+              window.open("https://www.linkedin.com/in/ben-jebli-amine/", "_blank")
             }
             aria-label="LinkedIn"
           >
             <LinkedInLogoIcon className="h-6 w-6" />
           </Button>
-          <Button
+            <Button
             variant="ghost"
             size="icon"
             onClick={() =>
-              (window.location.href = "mailto:your.email@example.com")
+              (window.location.href = "mailto:aminebenjebli@gmail.com")
             }
             aria-label="Email"
-          >
+            >
             <Mail className="h-6 w-6" />
-          </Button>
+            </Button>
         </motion.div>
       </motion.div>
     </section>

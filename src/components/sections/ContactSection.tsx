@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { fadeIn, stagger } from "@/data/animations";
+import { AnimatedText, GradientText } from "@/components/ui/animated-text";
 
 export function ContactSection() {
   return (
@@ -23,14 +24,25 @@ export function ContactSection() {
           className="text-3xl md:text-4xl font-bold text-center mb-12"
           variants={fadeIn}
         >
-          Get In Touch
+          <GradientText
+            className="text-3xl md:text-4xl font-bold"
+            gradient="from-primary via-purple-500 to-blue-500"
+          >
+            Get In Touch
+          </GradientText>
         </motion.h2>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Info */}
           <motion.div variants={fadeIn} className="space-y-8">
             <div>
-              <h3 className="text-2xl font-semibold mb-4">Let's Connect</h3>
+              <h3 className="text-2xl font-semibold mb-4">
+                <AnimatedText
+                  text="Let's Connect"
+                  className="text-2xl font-semibold"
+                  delay={0.3}
+                />
+              </h3>
               <p className="text-lg text-muted-foreground mb-6">
                 I'm always interested in hearing about new opportunities and
                 interesting projects. Whether you have a question or just want
@@ -64,7 +76,7 @@ export function ContactSection() {
                     href="tel:+1234567890"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    +1 (234) 567-8900
+                    +216 54 327 348
                   </a>
                 </div>
               </div>

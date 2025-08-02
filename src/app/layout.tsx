@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Amine Ben Jebli - Portfolio",
-  description: "Full Stack Developer portfolio showcasing projects and skills",
+  description: "Engineer Full Stack Mobile Developer portfolio showcasing projects and skills",
   keywords: ["Next.js", "React", "TypeScript", "Full Stack Developer"],
   authors: [{ name: "Amine Ben Jebli" }],
   openGraph: {
@@ -47,7 +47,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navigation />
-          {children}
+          {children} {/* This is where page.tsx renders */}
         </ThemeProvider>
       </body>
     </html>

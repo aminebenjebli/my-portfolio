@@ -8,6 +8,7 @@ import { ExternalLink } from "lucide-react";
 import { projects } from "@/data/projects";
 import { technologies } from "@/data/technologies";
 import { fadeIn, stagger } from "@/data/animations";
+import { AnimatedText } from "@/components/ui/animated-text";
 
 export function ProjectsSection() {
   const getTechIcon = (techName: string) => {
@@ -37,9 +38,12 @@ export function ProjectsSection() {
           className="text-3xl md:text-4xl font-bold text-center mb-12"
           variants={fadeIn}
         >
-          Featured Projects
-        </motion.h2>
-
+          <AnimatedText
+            text="Featured Projects"
+            className="text-3xl md:text-4xl font-bold"
+            delay={0.2}
+          />
+        </motion.h2>{" "}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div key={project.id} variants={fadeIn}>
@@ -108,7 +112,6 @@ export function ProjectsSection() {
             </motion.div>
           ))}
         </div>
-
         <motion.div className="text-center mt-12" variants={fadeIn}>
           <Button size="lg" variant="outline" asChild>
             <a
