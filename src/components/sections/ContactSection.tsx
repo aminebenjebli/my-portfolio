@@ -1,16 +1,70 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
 import { fadeIn, stagger } from "@/data/animations";
 import { AnimatedText, GradientText } from "@/components/ui/animated-text";
+import { contactFormSchema, type ContactFormData } from "@/types/contact.dto";
 
 export function ContactSection() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+  });
+
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        toast.success("Message sent successfully!", {
+          description: "Thank you for reaching out. I'll get back to you soon.",
+        });
+        reset(); // Clear the form
+      } else if (result.details) {
+        // Handle validation errors
+        result.details.forEach((error: { field: string; message: string }) => {
+          toast.error(`${error.field}: ${error.message}`);
+        });
+      } else {
+        toast.error("Failed to send message", {
+          description: result.error || "Please try again later.",
+        });
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      toast.error("Network error", {
+        description: "Please check your connection and try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <section id="contact" className="container mx-auto px-4 py-20 bg-muted/50">
       <motion.div
@@ -58,10 +112,10 @@ export function ContactSection() {
                 <div>
                   <p className="font-medium">Email</p>
                   <a
-                    href="mailto:your.email@example.com"
+                    href="mailto:aminebenjebli@gmail.com"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    your.email@example.com
+                    aminebenjebli@gmail.com
                   </a>
                 </div>
               </div>
@@ -87,7 +141,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <p className="font-medium">Location</p>
-                  <p className="text-muted-foreground">San Francisco, CA</p>
+                  <p className="text-muted-foreground">Tunis, Tunisia</p>
                 </div>
               </div>
             </div>
@@ -108,15 +162,35 @@ export function ContactSection() {
                 <CardTitle>Send me a message</CardTitle>
               </CardHeader>
               <CardContent>
-                <form className="space-y-4">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="firstName">First Name</Label>
-                      <Input id="firstName" placeholder="John" />
+                      <Input
+                        id="firstName"
+                        placeholder="John"
+                        {...register("firstName")}
+                        className={errors.firstName ? "border-red-500" : ""}
+                      />
+                      {errors.firstName && (
+                        <p className="text-sm text-red-500">
+                          {errors.firstName.message}
+                        </p>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="lastName">Last Name</Label>
-                      <Input id="lastName" placeholder="Doe" />
+                      <Input
+                        id="lastName"
+                        placeholder="Doe"
+                        {...register("lastName")}
+                        className={errors.lastName ? "border-red-500" : ""}
+                      />
+                      {errors.lastName && (
+                        <p className="text-sm text-red-500">
+                          {errors.lastName.message}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -126,12 +200,29 @@ export function ContactSection() {
                       id="email"
                       type="email"
                       placeholder="john.doe@example.com"
+                      {...register("email")}
+                      className={errors.email ? "border-red-500" : ""}
                     />
+                    {errors.email && (
+                      <p className="text-sm text-red-500">
+                        {errors.email.message}
+                      </p>
+                    )}
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="subject">Subject</Label>
-                    <Input id="subject" placeholder="Project Collaboration" />
+                    <Input
+                      id="subject"
+                      placeholder="Project Collaboration"
+                      {...register("subject")}
+                      className={errors.subject ? "border-red-500" : ""}
+                    />
+                    {errors.subject && (
+                      <p className="text-sm text-red-500">
+                        {errors.subject.message}
+                      </p>
+                    )}
                   </div>
 
                   <div className="space-y-2">
@@ -139,13 +230,32 @@ export function ContactSection() {
                     <Textarea
                       id="message"
                       placeholder="Tell me about your project or just say hello..."
-                      className="min-h-[120px]"
+                      className={`min-h-[120px] ${errors.message ? "border-red-500" : ""}`}
+                      {...register("message")}
                     />
+                    {errors.message && (
+                      <p className="text-sm text-red-500">
+                        {errors.message.message}
+                      </p>
+                    )}
                   </div>
 
-                  <Button type="submit" className="w-full">
-                    <Send className="mr-2 h-4 w-4" />
-                    Send Message
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="mr-2 h-4 w-4" />
+                        Send Message
+                      </>
+                    )}
                   </Button>
                 </form>
               </CardContent>
@@ -167,7 +277,7 @@ export function ContactSection() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild>
-              <a href="mailto:your.email@example.com">
+              <a href="mailto:aminebenjebli@gmail.com">
                 <Mail className="mr-2 h-5 w-5" />
                 Start a Conversation
               </a>

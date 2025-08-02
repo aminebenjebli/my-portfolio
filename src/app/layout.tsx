@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Navigation } from "@/components/navigation";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,7 +17,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Amine Ben Jebli - Portfolio",
-  description: "Engineer Full Stack Mobile Developer portfolio showcasing projects and skills",
+  description:
+    "Engineer Full Stack Mobile Developer portfolio showcasing projects and skills",
   keywords: ["Next.js", "React", "TypeScript", "Full Stack Developer"],
   authors: [{ name: "Amine Ben Jebli" }],
   openGraph: {
@@ -48,6 +50,7 @@ export default function RootLayout({
         >
           <Navigation />
           {children} {/* This is where page.tsx renders */}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
