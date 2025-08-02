@@ -71,8 +71,10 @@ export function AboutSection() {
 
           <motion.div variants={fadeIn}>
             <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl p-8 border border-primary/20 shadow-lg backdrop-blur-sm">
-              <h3 className="text-xl font-semibold mb-6 text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Professional Metrics
+              <h3 className="text-xl font-bold mb-6 text-center">
+                <span className="text-primary hover:bg-gradient-to-r hover:from-primary hover:via-purple-500 hover:to-secondary hover:bg-clip-text hover:text-transparent transition-all duration-300">
+                  Professional Metrics
+                </span>
               </h3>
               <div className="space-y-6">
                 <motion.div
