@@ -28,44 +28,46 @@ export function AboutSection() {
         </motion.h2>
 
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-          <motion.div variants={fadeIn} className="space-y-6">
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              I’m a passionate Full Stack Mobile Developer currently completing
-              my final year of engineering studies at ESPRIT. With hands-on
-              experience in building scalable web and mobile applications, I
-              thrive on transforming complex challenges into elegant,
-              user-friendly solutions.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Beyond coding, I’m deeply curious about emerging technologies and
-              enjoy contributing to open-source projects. I also love sharing
-              knowledge—whether through technical writing, mentoring peers, or
-              collaborating on innovative ideas. When I’m not immersed in code,
-              you’ll find me exploring new frameworks or brainstorming ways to
-              make tech more intuitive and impactful.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <motion.span
-                className="px-4 py-2 bg-gradient-to-r from-emerald-500/20 to-emerald-600/20 text-emerald-600 dark:text-emerald-400 rounded-full text-sm font-medium border border-emerald-500/30 shadow-sm"
-                whileHover={{ scale: 1.05, y: -2 }}
-                transition={{ duration: 0.2 }}
-              >
-                Problem Solver
-              </motion.span>
-              <motion.span
-                className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-blue-600/20 text-blue-600 dark:text-blue-400 rounded-full text-sm font-medium border border-blue-500/30 shadow-sm"
-                whileHover={{ scale: 1.05, y: -2 }}
-                transition={{ duration: 0.2 }}
-              >
-                Team Player
-              </motion.span>
-              <motion.span
-                className="px-4 py-2 bg-gradient-to-r from-purple-500/20 to-purple-600/20 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium border border-purple-500/30 shadow-sm"
-                whileHover={{ scale: 1.05, y: -2 }}
-                transition={{ duration: 0.2 }}
-              >
-                Continuous Learner
-              </motion.span>
+          <motion.div variants={fadeIn}>
+            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl p-8 border border-primary/20 shadow-lg backdrop-blur-sm space-y-6">
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                I'm a passionate Full Stack Mobile Developer currently
+                completing my final year of engineering studies at ESPRIT. With
+                hands-on experience in building scalable web and mobile
+                applications, I thrive on transforming complex challenges into
+                elegant, user-friendly solutions.
+              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Beyond coding, I'm deeply curious about emerging technologies
+                and enjoy contributing to open-source projects. I also love
+                sharing knowledge—whether through technical writing, mentoring
+                peers, or collaborating on innovative ideas. When I'm not
+                immersed in code, you'll find me exploring new frameworks or
+                brainstorming ways to make tech more intuitive and impactful.
+              </p>
+              <div className="flex flex-wrap gap-3 pt-4">
+                <motion.span
+                  className="px-4 py-2 bg-gradient-to-r from-emerald-500/20 to-emerald-600/20 text-emerald-600 dark:text-emerald-400 rounded-full text-sm font-medium border border-emerald-500/30 shadow-sm"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  Problem Solver
+                </motion.span>
+                <motion.span
+                  className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-blue-600/20 text-blue-600 dark:text-blue-400 rounded-full text-sm font-medium border border-blue-500/30 shadow-sm"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  Team Player
+                </motion.span>
+                <motion.span
+                  className="px-4 py-2 bg-gradient-to-r from-purple-500/20 to-purple-600/20 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium border border-purple-500/30 shadow-sm"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  Continuous Learner
+                </motion.span>
+              </div>
             </div>
           </motion.div>
 
