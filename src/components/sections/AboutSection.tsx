@@ -1,10 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { AnimatedText, GradientText } from "@/components/ui/animated-text";
 import { skills } from "@/data/skills";
-import { technologies } from "@/data/technologies";
 import { fadeIn, stagger } from "@/data/animations";
 
 export function AboutSection() {
@@ -217,114 +216,117 @@ export function AboutSection() {
               const iconColor =
                 iconColors[skillGroup.category] || "hsl(var(--primary))";
 
+              // Function to get theme-aware color for tech icons
+              const getTechIconColor = (color: string, name: string) => {
+                const darkIcons = ["#000000", "#000020", "#FFFFFF"];
+                const isDarkIcon = darkIcons.includes(color);
+
+                if (
+                  name === "Next.js" ||
+                  name === "Symfony" ||
+                  name === "Notion" ||
+                  name === "iOS"
+                ) {
+                  return "hsl(var(--foreground))";
+                } else if (name === "Expo") {
+                  return "#4630EB";
+                } else if (isDarkIcon) {
+                  return "hsl(var(--foreground))";
+                }
+                return color;
+              };
+
               return (
                 <motion.div
                   key={skillGroup.category}
                   variants={fadeIn}
                   whileHover={{
                     scale: 1.02,
-                    y: -5,
-                    transition: { duration: 0.2 },
+                    y: -8,
+                    transition: { duration: 0.3 },
                   }}
                   className="group"
                 >
-                  <Card className="text-center h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/20 hover:shadow-xl transition-all duration-300 hover:bg-card/80">
-                    <CardHeader className="pb-3">
+                  <Card className="text-center h-full bg-gradient-to-br from-card/60 to-card/30 backdrop-blur-sm border-border/50 hover:border-primary/30 hover:shadow-2xl transition-all duration-500 hover:bg-gradient-to-br hover:from-card/80 hover:to-card/40 overflow-hidden">
+                    <CardHeader className="pb-4">
                       <motion.div
                         whileHover={{ rotate: 360, scale: 1.1 }}
                         transition={{ duration: 0.6 }}
-                        className="mx-auto mb-2"
+                        className="mx-auto mb-3"
                       >
                         <skillGroup.icon
-                          className="h-8 w-8"
+                          className="h-10 w-10"
                           style={{ color: iconColor }}
                         />
                       </motion.div>
-                      <CardTitle className="text-lg text-card-foreground group-hover:text-primary transition-colors">
+                      <CardTitle className="text-lg font-bold text-card-foreground group-hover:text-primary transition-colors mb-4">
                         {skillGroup.category}
                       </CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <div className="flex flex-wrap gap-2 justify-center">
-                        {skillGroup.skills.map((skill, skillIndex) => (
-                          <motion.span
-                            key={skill}
-                            initial={{ opacity: 0, scale: 0.8 }}
+
+                      {/* Technology Icons for this category */}
+                      {skillGroup.techIcons &&
+                        skillGroup.techIcons.length > 0 && (
+                          <motion.div
+                            className="flex flex-wrap justify-center gap-3 mb-4 p-3 bg-gradient-to-r from-primary/5 to-purple-500/5 rounded-lg border border-primary/10"
+                            initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            transition={{
-                              delay: index * 0.1 + skillIndex * 0.05,
-                              duration: 0.3,
-                            }}
-                            whileHover={{ scale: 1.05 }}
-                            className="inline-block px-3 py-1 bg-primary/10 hover:bg-primary/20 text-xs rounded-full text-card-foreground transition-all duration-200 border border-primary/20 hover:border-primary/40"
+                            transition={{ delay: index * 0.1 + 0.2 }}
                           >
-                            {skill}
-                          </motion.span>
-                        ))}
-                      </div>
-                    </CardContent>
+                            {skillGroup.techIcons.map((tech, techIndex) => (
+                              <motion.div
+                                key={tech.name}
+                                initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                transition={{
+                                  delay: index * 0.1 + techIndex * 0.05 + 0.3,
+                                  duration: 0.4,
+                                  type: "spring",
+                                  stiffness: 200,
+                                }}
+                                whileHover={{
+                                  scale: 1.3,
+                                  y: -5,
+                                  rotate: [0, -5, 5, 0],
+                                  transition: { duration: 0.3 },
+                                }}
+                                className="relative group/tech"
+                              >
+                                <tech.icon
+                                  className="h-6 w-6 drop-shadow-sm transition-all duration-300 group-hover/tech:drop-shadow-lg"
+                                  style={{
+                                    color: getTechIconColor(
+                                      tech.color,
+                                      tech.name
+                                    ),
+                                  }}
+                                />
+                                {/* Tooltip with progress */}
+                                <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 px-3 py-2 bg-black/90 text-white text-xs rounded-lg opacity-0 group-hover/tech:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10 min-w-[100px]">
+                                  <div className="text-center mb-1">
+                                    {tech.name}
+                                  </div>
+                                  <div className="flex justify-between items-center mb-1 text-[10px]">
+                                    <span>Progress</span>
+                                    <span className="font-bold">
+                                      {tech.progress}%
+                                    </span>
+                                  </div>
+                                  <div className="w-full bg-gray-600 rounded-full h-1">
+                                    <div
+                                      className="h-1 rounded-full transition-all duration-300"
+                                      style={{
+                                        width: `${tech.progress}%`,
+                                        background: `linear-gradient(90deg, ${getTechIconColor(tech.color, tech.name)}aa, ${getTechIconColor(tech.color, tech.name)})`,
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+                              </motion.div>
+                            ))}
+                          </motion.div>
+                        )}
+                    </CardHeader>
                   </Card>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* Technology Icons */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-4">
-            {technologies.map((tech, index) => {
-              // Handle dark icons that need special treatment in dark mode
-              const darkIcons = ["#000000", "#000020", "#FFFFFF"];
-              const isDarkIcon = darkIcons.includes(tech.color);
-
-              let iconColor = tech.color;
-
-              // Special handling for specific technologies
-              if (
-                tech.name === "Next.js" ||
-                tech.name === "Symfony" ||
-                tech.name === "Notion"
-              ) {
-                iconColor = "hsl(var(--foreground))"; // Theme-aware foreground
-              } else if (tech.name === "Expo") {
-                iconColor = "#4630EB"; // Expo brand purple
-              } else if (isDarkIcon) {
-                iconColor = "hsl(var(--foreground))";
-              }
-
-              return (
-                <motion.div
-                  key={tech.name}
-                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{
-                    delay: index * 0.02,
-                    duration: 0.3,
-                    type: "spring",
-                    stiffness: 100,
-                  }}
-                  whileHover={{
-                    scale: 1.1,
-                    y: -8,
-                    rotateY: 15,
-                    transition: { duration: 0.2 },
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className="group"
-                >
-                  <div className="flex flex-col items-center p-4 rounded-xl bg-card/30 backdrop-blur-sm border border-border/30 hover:border-primary/40 transition-all duration-300 hover:bg-card/60 hover:shadow-lg">
-                    <motion.div
-                      whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-                      transition={{ duration: 0.4 }}
-                    >
-                      <tech.icon
-                        className="h-8 w-8 mb-3 group-hover:drop-shadow-lg transition-all duration-300"
-                        style={{ color: iconColor }}
-                      />
-                    </motion.div>
-                    <span className="text-xs text-center leading-tight font-medium text-card-foreground group-hover:text-primary transition-colors">
-                      {tech.name}
-                    </span>
-                  </div>
                 </motion.div>
               );
             })}
