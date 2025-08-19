@@ -10,7 +10,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  Loader2,
+  Calendar,
+  Coffee,
+  MessageCircle,
+} from "lucide-react";
+import { LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { fadeIn, stagger } from "@/data/animations";
 import { AnimatedText, GradientText } from "@/components/ui/animated-text";
 import { contactFormSchema, type ContactFormData } from "@/types/contact.dto";
@@ -275,18 +285,96 @@ export function ContactSection() {
             Whether you need a full-stack web application, mobile app, or just
             want to discuss an idea, I'm here to help bring your vision to life.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Button size="lg" asChild>
               <a href="mailto:aminebenjebli@gmail.com">
                 <Mail className="mr-2 h-5 w-5" />
                 Start a Conversation
               </a>
             </Button>
-            <Button size="lg" variant="outline" asChild>
-              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-                Download Resume
-              </a>
-            </Button>
+
+            {/* Creative Quick Connect Widget */}
+            <motion.div
+              className="bg-gradient-to-r from-primary/10 to-purple-500/10 rounded-lg p-4 border border-primary/20 backdrop-blur-sm"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-sm font-medium text-green-600 dark:text-green-400">
+                    Available for projects
+                  </span>
+                </div>
+                <Coffee className="h-4 w-4 text-muted-foreground" />
+              </div>
+
+              <p className="text-xs text-muted-foreground mb-3">
+                Currently accepting new opportunities • Based in Tunisia (GMT+1)
+              </p>
+
+              <div className="flex space-x-2">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() =>
+                    window.open(
+                      "https://www.linkedin.com/in/ben-jebli-amine/",
+                      "_blank"
+                    )
+                  }
+                  className="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
+                  title="Connect on LinkedIn"
+                >
+                  <LinkedInLogoIcon className="h-4 w-4" />
+                </motion.button>
+
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    const link = document.createElement("a");
+                    link.href =
+                      "mailto:aminebenjebli@gmail.com?subject=Quick%20Chat%20Request";
+                    link.click();
+                  }}
+                  className="p-2 bg-green-600 hover:bg-green-700 text-white rounded-md transition-colors"
+                  title="Schedule a quick chat"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                </motion.button>
+
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => window.open("tel:+21654327348", "_blank")}
+                  className="p-2 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition-colors"
+                  title="Call me"
+                >
+                  <Phone className="h-4 w-4" />
+                </motion.button>
+
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    const now = new Date();
+                    const tomorrow = new Date(now);
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    const timeSlot = "14:00"; // 2 PM
+                    const subject = `Meeting Request for ${tomorrow.toDateString()} at ${timeSlot}`;
+                    const body = `Hi Amine,\n\nI'd like to schedule a meeting with you.\n\nPreferred time: ${tomorrow.toDateString()} at ${timeSlot} (GMT+1)\n\nBest regards`;
+                    const link = document.createElement("a");
+                    link.href = `mailto:aminebenjebli@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    link.click();
+                  }}
+                  className="p-2 bg-orange-600 hover:bg-orange-700 text-white rounded-md transition-colors"
+                  title="Schedule a meeting"
+                >
+                  <Calendar className="h-4 w-4" />
+                </motion.button>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
       </motion.div>

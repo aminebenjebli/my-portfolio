@@ -60,7 +60,17 @@ export function HeroSection() {
           <Button
             variant="outline"
             size="lg"
-            onClick={() => window.open("/resume.pdf", "_blank")}
+            onClick={() => {
+              // Create a temporary link element for download
+              const link = document.createElement("a");
+              link.href = "/documents/Amine-benjebli-resume-internship.pdf";
+              link.download = "Amine-benjebli-resume-internship.pdf"; // Custom filename for download
+              link.target = "_blank";
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }}
+            className="hover:bg-primary/10 hover:border-primary/40 transition-all duration-300"
           >
             <Download className="mr-2 h-4 w-4" />
             Resume
@@ -82,22 +92,25 @@ export function HeroSection() {
             variant="ghost"
             size="icon"
             onClick={() =>
-              window.open("https://www.linkedin.com/in/ben-jebli-amine/", "_blank")
+              window.open(
+                "https://www.linkedin.com/in/ben-jebli-amine/",
+                "_blank"
+              )
             }
             aria-label="LinkedIn"
           >
             <LinkedInLogoIcon className="h-6 w-6" />
           </Button>
-            <Button
+          <Button
             variant="ghost"
             size="icon"
             onClick={() =>
               (window.location.href = "mailto:aminebenjebli@gmail.com")
             }
             aria-label="Email"
-            >
+          >
             <Mail className="h-6 w-6" />
-            </Button>
+          </Button>
         </motion.div>
       </motion.div>
     </section>
