@@ -13,6 +13,8 @@ import {
   Zap,
   Target,
   Sparkles,
+  X,
+  ZoomIn,
 } from "lucide-react";
 import { projects } from "@/data/projects";
 import { technologies } from "@/data/technologies";
@@ -21,6 +23,10 @@ import { GradientText } from "@/components/ui/animated-text";
 
 export function ProjectsSection() {
   const [expandedCards, setExpandedCards] = useState<number[]>([]);
+  const [selectedImage, setSelectedImage] = useState<{
+    src: string;
+    alt: string;
+  } | null>(null);
 
   const toggleCard = (projectId: number) => {
     setExpandedCards((prev) =>
@@ -28,6 +34,25 @@ export function ProjectsSection() {
         ? prev.filter((id) => id !== projectId)
         : [...prev, projectId]
     );
+  };
+
+  const openImageModal = (src: string, alt: string) => {
+    setSelectedImage({ src, alt });
+  };
+
+  const closeImageModal = () => {
+    setSelectedImage(null);
+  };
+
+  const getImagePosition = (index: number) => {
+    const positions = [
+      "object-top",
+      "object-center",
+      "object-top",
+      "object-center",
+      "object-center",
+    ];
+    return positions[index % 5];
   };
 
   const getTechIcon = (techName: string) => {
@@ -161,6 +186,36 @@ export function ProjectsSection() {
                   </CardHeader>
 
                   <CardContent className="space-y-6">
+                    {/* Project Image */}
+                    <motion.div
+                      className="relative overflow-hidden rounded-lg bg-muted/20 cursor-pointer group/image"
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      whileHover={{ scale: 1.02 }}
+                      onClick={() =>
+                        openImageModal(project.image, project.title)
+                      }
+                    >
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className={`w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105 ${getImagePosition(index)}`}
+                        onError={(e) => {
+                          // Fallback to placeholder if image fails to load
+                          e.currentTarget.src = "/api/placeholder/400/300";
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                      {/* Zoom icon overlay */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/image:opacity-100 transition-opacity duration-300">
+                        <div className="bg-black/50 backdrop-blur-sm rounded-full p-3">
+                          <ZoomIn className="h-6 w-6 text-white" />
+                        </div>
+                      </div>
+                    </motion.div>
+
                     <motion.p
                       className="text-muted-foreground leading-relaxed text-base"
                       initial={{ opacity: 0.8 }}
@@ -308,6 +363,54 @@ export function ProjectsSection() {
           </motion.p>
         </motion.div>
       </motion.div>
+
+      {/* Image Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeImageModal}
+          >
+            <motion.div
+              className="relative max-w-4xl max-h-[90vh] w-full"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button
+                onClick={closeImageModal}
+                className="absolute -top-12 right-0 z-10 p-2 text-white hover:text-gray-300 transition-colors"
+              >
+                <X className="h-8 w-8" />
+              </button>
+
+              {/* Full image */}
+              <img
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                className="w-full h-full object-contain rounded-lg bg-white/10 backdrop-blur-sm"
+                onError={(e) => {
+                  e.currentTarget.src = "/api/placeholder/800/600";
+                }}
+              />
+
+              {/* Image title */}
+              <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm text-white p-4 rounded-b-lg">
+                <h3 className="text-lg font-semibold">{selectedImage.alt}</h3>
+                <p className="text-sm text-gray-300 mt-1">
+                  Click anywhere outside to close
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

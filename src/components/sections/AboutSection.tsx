@@ -29,6 +29,20 @@ export function AboutSection() {
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <motion.div variants={fadeIn}>
             <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl p-8 border border-primary/20 shadow-lg backdrop-blur-sm space-y-6">
+              <motion.h3
+                className="text-2xl font-bold mb-6 text-primary"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <GradientText
+                  className="text-2xl font-bold"
+                  gradient="from-primary via-purple-500 to-secondary"
+                >
+                  My Journey
+                </GradientText>
+              </motion.h3>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 I'm a passionate Full Stack Mobile Developer currently
                 completing my final year of engineering studies at ESPRIT. With

@@ -118,7 +118,12 @@ export const skills = [
       },
       { name: "PHP", icon: SiPhp, color: "#777BB4", progress: 40 },
       { name: "Symfony", icon: SiSymfony, color: "#000000", progress: 40 },
-      { name: "Spring Boot", icon: SiSpringboot, color: "#6DB33F", progress: 40},
+      {
+        name: "Spring Boot",
+        icon: SiSpringboot,
+        color: "#6DB33F",
+        progress: 40,
+      },
     ],
   },
   {
@@ -200,9 +205,9 @@ export const skills = [
         name: "Adobe Photoshop",
         icon: SiAdobephotoshop,
         color: "#31A8FF",
-        progress: 75,
+        progress: 60,
       },
-      { name: "Canva", icon: SiCanva, color: "#00C4CC", progress: 80 },
+      { name: "Canva", icon: SiCanva, color: "#00C4CC", progress: 95 },
     ],
   },
   {
@@ -210,8 +215,8 @@ export const skills = [
     icon: Zap,
     skills: ["Swagger", "Postman"],
     techIcons: [
-      { name: "Postman", icon: SiPostman, color: "#FF6C37", progress: 85 },
-      { name: "Swagger", icon: SiSwagger, color: "#85EA2D", progress: 75 },
+      { name: "Postman", icon: SiPostman, color: "#FF6C37", progress: 80 },
+      { name: "Swagger", icon: SiSwagger, color: "#85EA2D", progress: 90 },
     ],
   },
   {

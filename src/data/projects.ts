@@ -16,7 +16,7 @@ export const projects = [
     ],
     github: "https://github.com/ToBeDefined-PIM/speechy-web.git",
     demo: "https://speechy-demo.com",
-    image: "/api/placeholder/400/300",
+    image: "/images/projects/speechy.jpg",
     features: [
       "AI-Powered Learning – Real-time feedback & adaptive exercises for speech improvement.",
       "Interactive 3D Avatars – Lifelike characters for engaging communication practice.",
@@ -32,7 +32,7 @@ export const projects = [
     tech: ["Next.Js", "NestJs", "MongoDB", "Socket.io", "Flutter", "AI/ML"],
     github: "https://github.com/ToBeDefined-PIM/alumni-x-hack-web.git",
     demo: "https://taskmanager-demo.com",
-    image: "/api/placeholder/400/300",
+    image: "/images/projects/alumni-x.jpg",
     features: [
       "AI-Driven Matching – Smart algorithms pair students with alumni based on shared interests, industries, and goals.",
       "Entrepreneurial Insights – Access success stories, business strategies, and real-world project development case studies.",
@@ -48,7 +48,7 @@ export const projects = [
     tech: ["Flutter", "NestJs", "MongoDb"],
     github: "https://github.com/aminebenjebli/HackathonMobile.git",
     demo: "https://weather-demo.com",
-    image: "/api/placeholder/400/300",
+    image: "/images/projects/cement-hackathon.jpg",
     features: [
       "Intelligent Vendor Mapping - Interactive geolocation system for instant identification of nearest sales representatives and distribution partners",
       "Real-Time Performance Analytics - Comprehensive dashboard for monitoring sales metrics and operational KPIs",
@@ -64,7 +64,7 @@ export const projects = [
     tech: ["Swift", "Kotlin", "Nestjs", "MongoDb"],
     github: "https://github.com/aminebenjebli/CosmiaIOS.git",
     demo: "https://weather-demo.com",
-    image: "/api/placeholder/400/300",
+    image: "/images/projects/cosmia.png",
     features: [
       "Horoscopes:  AI-generated daily horoscopes with visual artwork",
       "Stories: Ephemeral story sharing with interactive commenting",
@@ -82,10 +82,11 @@ export const projects = [
     title: "Chobik-lobik- Next-Gen Restaurant Intelligence Platform ",
     description:
       "An AI-driven hospitality solution designed to transform restaurant operations and customer experiences through advanced technology. Our platform integrates three core innovations to optimize efficiency, engagement, and staff training in the food service industry.",
-    tech: ["Java", "Symphony", "mySql","Twig"],
-    github: "https://github.com/aminebenjebli/ChobikLobik-Java-GestionProduit.git",
+    tech: ["Java", "JavaFX", "Symfony", "MySQL", "Twig"],
+    github:
+      "https://github.com/aminebenjebli/ChobikLobik-Java-GestionProduit.git",
     demo: "https://zodiac-social-demo.com",
-    image: "/api/placeholder/400/300",
+    image: "/images/projects/chobik-lobik.png",
     features: [
       "AI Voice Ordering - Natural language processing for seamless voice-activated ordering",
       "Smart Social Chatbot - Conversational AI for customer engagement and support",

@@ -35,7 +35,12 @@ import {
   SiCplusplus,
   SiAndroid,
   SiApple,
+  SiSocketdotio,
+  SiUnity,
+  SiTensorflow,
+  SiWebrtc,
 } from "react-icons/si";
+import { Box } from "lucide-react";
 
 export const technologies = [
   // Programming Languages
@@ -53,6 +58,7 @@ export const technologies = [
   { name: "React", icon: SiReact, color: "#61DAFB", progress: 95 },
   { name: "Next.js", icon: SiNextdotjs, color: "#000000", progress: 90 }, // Will be handled dynamically
   { name: "NestJS", icon: SiNestjs, color: "#E0234E", progress: 85 },
+  { name: "NestJs", icon: SiNestjs, color: "#E0234E", progress: 85 }, // Alternative spelling
   { name: "Node.js", icon: SiNodedotjs, color: "#339933", progress: 85 },
   { name: "HTML5", icon: SiHtml5, color: "#E34F26", progress: 95 },
   { name: "CSS3", icon: SiCss3, color: "#1572B6", progress: 90 },
@@ -71,6 +77,7 @@ export const technologies = [
   { name: "MySQL", icon: SiMysql, color: "#4479A1", progress: 80 },
   { name: "PostgreSQL", icon: SiPostgresql, color: "#336791", progress: 75 },
   { name: "MongoDB", icon: SiMongodb, color: "#47A248", progress: 85 },
+  { name: "MongoDb", icon: SiMongodb, color: "#47A248", progress: 85 }, // Alternative spelling
   { name: "Firebase", icon: SiFirebase, color: "#FFCA28", progress: 80 },
   { name: "Oracle", icon: SiOracle, color: "#F80000", progress: 60 },
 
@@ -85,4 +92,13 @@ export const technologies = [
   { name: "Trello", icon: SiTrello, color: "#0079BF", progress: 80 },
   { name: "Notion", icon: SiNotion, color: "#000000", progress: 90 }, // Will be handled dynamically
   { name: "Framer Motion", icon: SiFramer, color: "#0055FF", progress: 85 },
+
+  // Additional Technologies
+  { name: "Unity", icon: SiUnity, color: "#000000", progress: 75 },
+  { name: "Socket.io", icon: SiSocketdotio, color: "#010101", progress: 80 },
+  { name: "AI/ML", icon: SiTensorflow, color: "#FF6F00", progress: 70 },
+  { name: "WebRTC", icon: SiWebrtc, color: "#333333", progress: 65 },
+  { name: "JavaFX", icon: SiAndroid, color: "#ED8B00", progress: 60 }, // Using Java-related icon
+  { name: "Twig", icon: SiSymfony, color: "#8BC34A", progress: 70 }, // Twig is part of Symfony ecosystem
+  { name: "3D modeling", icon: Box, color: "#9C27B0", progress: 65 },
 ];
